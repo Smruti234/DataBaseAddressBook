@@ -1,0 +1,396 @@
+Enter password: ***********
+Welcome to the MySQL monitor. 
+
+UC1_Create addressBook
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| payroll_service    |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> create database addressbook_service;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> show databases;
++---------------------+
+| Database            |
++---------------------+
+| addressbook_service |
+| information_schema  |
+| mysql               |
+| payroll_service     |
+| performance_schema  |
+| sys                 |
++---------------------+
+6 rows in set (0.00 sec)
+
+mysql>Uc2-Ability to create a AddressBook Table
+
+mysql> use addressbook_service;
+Database changed
+mysql> select database();
++---------------------+
+| database()          |
++---------------------+
+| addressbook_service |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> create table addressbook
+    -> (
+    -> firstname varchar(150) NOT NULL,
+    -> lastname varchar(150) NOT NULL,
+    -> address varchar(150) NOT NULL,
+    -> city varchar(150) NOT NULL,
+    -> state varchar(150) NOT NULL,
+    -> zip varchar(150) NOT NULL,
+    -> mobilenumber varchar(150) NOT NULL,
+    -> email varchar(150) NOT NULL
+    ->  );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> describe addressbook;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| firstname    | varchar(150) | NO   |     | NULL    |       |
+| lastname     | varchar(150) | NO   |     | NULL    |       |
+| address      | varchar(150) | NO   |     | NULL    |       |
+| city         | varchar(150) | NO   |     | NULL    |       |
+| state        | varchar(150) | NO   |     | NULL    |       |
+| zip          | varchar(150) | NO   |     | NULL    |       |
+| mobilenumber | varchar(150) | NO   |     | NULL    |       |
+| email        | varchar(150) | NO   |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+8 rows in set (0.01 sec)
+
+mysql>Uc3- Ability to insert new Contacts
+
+mysql>  insert into addressbook ( firstname, lastname, address, city, state, zip, mobilenumber,email) values
+    -> ( 'Smruti', 'Lenka', 'Artung', 'Basudevpur', 'Odisha','756046', '8917341747', 'slenka132@gmail.com'),
+    -> ( 'Shruti', 'Panda', 'Gud', 'Soro', 'Odisha','756125', '7504614661', 'abc@gmail.com'),
+    -> ( 'Chinku', 'padhi', 'wrewdcr', 'Patna', 'Bihar','756165', '1234567891', 'rtyg@gmail.com');
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from addressbook;
++-----------+----------+---------+------------+--------+--------+--------------+---------------------+
+| firstname | lastname | address | city       | state  | zip    | mobilenumber | email               |
++-----------+----------+---------+------------+--------+--------+--------------+---------------------+
+| Smruti    | Lenka    | Artung  | Basudevpur | Odisha | 756046 | 8917341747   | slenka132@gmail.com |
+| Shruti    | Panda    | Gud     | Soro       | Odisha | 756125 | 7504614661   | abc@gmail.com       |
+| Chinku    | padhi    | wrewdcr | Patna      | Bihar  | 756165 | 1234567891   | rtyg@gmail.com      |
++-----------+----------+---------+------------+--------+--------+--------------+---------------------+
+3 rows in set (0.00 sec)
+
+mysql> Uc4- Edit Contact Details
+
+mysql> update addressbook set city = 'Balasore' where firstname = 'Chinku';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from addressbook;
++-----------+----------+---------+------------+--------+--------+--------------+---------------------+
+| firstname | lastname | address | city       | state  | zip    | mobilenumber | email               |
++-----------+----------+---------+------------+--------+--------+--------------+---------------------+
+| Smruti    | Lenka    | Artung  | Basudevpur | Odisha | 756046 | 8917341747   | slenka132@gmail.com |
+| Shruti    | Panda    | Gud     | Soro       | Odisha | 756125 | 7504614661   | abc@gmail.com       |
+| Chinku    | padhi    | wrewdcr | Balasore   | Bihar  | 756165 | 1234567891   | rtyg@gmail.com      |
++-----------+----------+---------+------------+--------+--------+--------------+---------------------+
+3 rows in set (0.01 sec)
+
+mysql> update addressbook set address = 'Bhadrak' where firstname = 'Smruti';
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from addressbook;
++-----------+----------+---------+------------+--------+--------+--------------+---------------------+
+| firstname | lastname | address | city       | state  | zip    | mobilenumber | email               |
++-----------+----------+---------+------------+--------+--------+--------------+---------------------+
+| Smruti    | Lenka    | Bhadrak | Basudevpur | Odisha | 756046 | 8917341747   | slenka132@gmail.com |
+| Shruti    | Panda    | Gud     | Soro       | Odisha | 756125 | 7504614661   | abc@gmail.com       |
+| Chinku    | padhi    | wrewdcr | Balasore   | Bihar  | 756165 | 1234567891   | rtyg@gmail.com      |
++-----------+----------+---------+------------+--------+--------+--------------+---------------------+
+3 rows in set (0.01 sec)
+
+mysql>Uc5-Delete a Person 
+
+mysql>
+mysql> delete from addressbook where firstname = 'Shruti';
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from addressbook;
++-----------+----------+---------+------------+--------+--------+--------------+---------------------+
+| firstname | lastname | address | city       | state  | zip    | mobilenumber | email               |
++-----------+----------+---------+------------+--------+--------+--------------+---------------------+
+| Smruti    | Lenka    | Bhadrak | Basudevpur | Odisha | 756046 | 8917341747   | slenka132@gmail.com |
+| Chinku    | padhi    | wrewdcr | Balasore   | Bihar  | 756165 | 1234567891   | rtyg@gmail.com      |
++-----------+----------+---------+------------+--------+--------+--------------+---------------------+
+2 rows in set (0.00 sec)
+
+mysql>
+Uc6-Ability to Retrieve Person belonging to a City or State
+
+mysql> select * from addressbook;
++-----------+----------+---------+------------+--------+--------+--------------+---------------------+
+| firstname | lastname | address | city       | state  | zip    | mobilenumber | email               |
++-----------+----------+---------+------------+--------+--------+--------------+---------------------+
+| Smruti    | Lenka    | Bhadrak | Basudevpur | Odisha | 756046 | 8917341747   | slenka132@gmail.com |
+| Chinku    | padhi    | wrewdcr | Balasore   | Bihar  | 756165 | 1234567891   | rtyg@gmail.com      |
++-----------+----------+---------+------------+--------+--------+--------------+---------------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from addressbook where city = 'Balasore' or state = 'Bihar';
++-----------+----------+---------+----------+-------+--------+--------------+----------------+
+| firstname | lastname | address | city     | state | zip    | mobilenumber | email          |
++-----------+----------+---------+----------+-------+--------+--------------+----------------+
+| Chinku    | padhi    | wrewdcr | Balasore | Bihar | 756165 | 1234567891   | rtyg@gmail.com |
++-----------+----------+---------+----------+-------+--------+--------------+----------------+
+1 row in set (0.00 sec)
+
+mysql>Uc7-Ability to understand the size
+
+mysql> select * from addressbook;
++-----------+----------+---------+------------+--------+--------+--------------+---------------------+
+| firstname | lastname | address | city       | state  | zip    | mobilenumber | email               |
++-----------+----------+---------+------------+--------+--------+--------------+---------------------+
+| Smruti    | Lenka    | Bhadrak | Basudevpur | Odisha | 756046 | 8917341747   | slenka132@gmail.com |
+| Chinku    | padhi    | wrewdcr | Balasore   | Bihar  | 756165 | 1234567891   | rtyg@gmail.com      |
++-----------+----------+---------+------------+--------+--------+--------------+---------------------+
+2 rows in set (0.00 sec)
+
+mysql>  insert into addressbook ( firstname, lastname, address, city, state, zip, mobilenumber,email) values
+    -> ( 'Serty', 'cgr', 'Wtfrr', 'Twedw', 'tyr','497565', '7654327896', 'dewq@gmail.com'),
+    -> ( 'Ctrw', 'kew', 'qewr', 'rtew', 'sdrr','453675', '4357864566', 'rteq@gmail.com');
+Query OK, 2 rows affected (0.02 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+
+mysql> select * from addressbook;
++-----------+----------+---------+------------+--------+--------+--------------+---------------------+
+| firstname | lastname | address | city       | state  | zip    | mobilenumber | email               |
++-----------+----------+---------+------------+--------+--------+--------------+---------------------+
+| Smruti    | Lenka    | Bhadrak | Basudevpur | Odisha | 756046 | 8917341747   | slenka132@gmail.com |
+| Chinku    | padhi    | wrewdcr | Balasore   | Bihar  | 756165 | 1234567891   | rtyg@gmail.com      |
+| Serty     | cgr      | Wtfrr   | Twedw      | tyr    | 497565 | 7654327896   | dewq@gmail.com      |
+| Ctrw      | kew      | qewr    | rtew       | sdrr   | 453675 | 4357864566   | rteq@gmail.com      |
++-----------+----------+---------+------------+--------+--------+--------------+---------------------+
+4 rows in set (0.01 sec)
+
+mysql> select state,count(state) from addressbook group by state;
++--------+--------------+
+| state  | count(state) |
++--------+--------------+
+| Odisha |            1 |
+| Bihar  |            1 |
+| tyr    |            1 |
+| sdrr   |            1 |
++--------+--------------+
+4 rows in set (0.00 sec)
+
+mysql> select city,count(city) from addressbook group by city;
++------------+-------------+
+| city       | count(city) |
++------------+-------------+
+| Basudevpur |           1 |
+| Balasore   |           1 |
+| Twedw      |           1 |
+| rtew       |           1 |
++------------+-------------+
+4 rows in set (0.00 sec)
+
+mysql>Uc8-Ability to retrieve entries sorted
+mysql>
+mysql> select * from addressbook where city = 'Bhadrak' order by firstname;
+Empty set (0.00 sec)
+
+mysql> select * from addressbook;
++-----------+----------+---------+------------+--------+--------+--------------+---------------------+
+| firstname | lastname | address | city       | state  | zip    | mobilenumber | email               |
++-----------+----------+---------+------------+--------+--------+--------------+---------------------+
+| Smruti    | Lenka    | Bhadrak | Basudevpur | Odisha | 756046 | 8917341747   | slenka132@gmail.com |
+| Chinku    | padhi    | wrewdcr | Balasore   | Bihar  | 756165 | 1234567891   | rtyg@gmail.com      |
+| Serty     | cgr      | Wtfrr   | Twedw      | tyr    | 497565 | 7654327896   | dewq@gmail.com      |
+| Ctrw      | kew      | qewr    | rtew       | sdrr   | 453675 | 4357864566   | rteq@gmail.com      |
++-----------+----------+---------+------------+--------+--------+--------------+---------------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from addressbook where address = 'Bhadrak' order by firstname;
++-----------+----------+---------+------------+--------+--------+--------------+---------------------+
+| firstname | lastname | address | city       | state  | zip    | mobilenumber | email               |
++-----------+----------+---------+------------+--------+--------+--------------+---------------------+
+| Smruti    | Lenka    | Bhadrak | Basudevpur | Odisha | 756046 | 8917341747   | slenka132@gmail.com |
++-----------+----------+---------+------------+--------+--------+--------------+---------------------+
+1 row in set (0.01 sec)
+
+Uc9_Ability to identify each Address Book with name and Type.
+
+mysql> select * from addressbook;
++-----------+----------+---------+------------+--------+--------+--------------+---------------------+
+| firstname | lastname | address | city       | state  | zip    | mobilenumber | email               |
++-----------+----------+---------+------------+--------+--------+--------------+---------------------+
+| Smruti    | Lenka    | Bhadrak | Basudevpur | Odisha | 756046 | 8917341747   | slenka132@gmail.com |
+| Chinku    | padhi    | wrewdcr | Balasore   | Bihar  | 756165 | 1234567891   | rtyg@gmail.com      |
+| Serty     | cgr      | Wtfrr   | Twedw      | tyr    | 497565 | 7654327896   | dewq@gmail.com      |
+| Ctrw      | kew      | qewr    | rtew       | sdrr   | 453675 | 4357864566   | rteq@gmail.com      |
++-----------+----------+---------+------------+--------+--------+--------------+---------------------+
+4 rows in set (0.00 sec)
+
+mysql> alter table addressbook add type varchar(150) not null after lastname;
+Query OK, 0 rows affected (0.09 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from addressbook;
++-----------+----------+------+---------+------------+--------+--------+--------------+---------------------+
+| firstname | lastname | type | address | city       | state  | zip    | mobilenumber | email               |
++-----------+----------+------+---------+------------+--------+--------+--------------+---------------------+
+| Smruti    | Lenka    |      | Bhadrak | Basudevpur | Odisha | 756046 | 8917341747   | slenka132@gmail.com |
+| Chinku    | padhi    |      | wrewdcr | Balasore   | Bihar  | 756165 | 1234567891   | rtyg@gmail.com      |
+| Serty     | cgr      |      | Wtfrr   | Twedw      | tyr    | 497565 | 7654327896   | dewq@gmail.com      |
+| Ctrw      | kew      |      | qewr    | rtew       | sdrr   | 453675 | 4357864566   | rteq@gmail.com      |
++-----------+----------+------+---------+------------+--------+--------+--------------+---------------------+
+4 rows in set (0.00 sec)
+
+mysql> update addressbook set type = 'family' where lastname = 'padhi' or lastname = 'cgr';
+Query OK, 2 rows affected (0.02 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> select * from addressbook;
++-----------+----------+--------+---------+------------+--------+--------+--------------+---------------------+
+| firstname | lastname | type   | address | city       | state  | zip    | mobilenumber | email               |
++-----------+----------+--------+---------+------------+--------+--------+--------------+---------------------+
+| Smruti    | Lenka    |        | Bhadrak | Basudevpur | Odisha | 756046 | 8917341747   | slenka132@gmail.com |
+| Chinku    | padhi    | family | wrewdcr | Balasore   | Bihar  | 756165 | 1234567891   | rtyg@gmail.com      |
+| Serty     | cgr      | family | Wtfrr   | Twedw      | tyr    | 497565 | 7654327896   | dewq@gmail.com      |
+| Ctrw      | kew      |        | qewr    | rtew       | sdrr   | 453675 | 4357864566   | rteq@gmail.com      |
++-----------+----------+--------+---------+------------+--------+--------+--------------+---------------------+
+4 rows in set (0.01 sec)
+
+mysql> update addressbook set type = 'friends' where lastname = 'Lenka';
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from addressbook;
++-----------+----------+---------+---------+------------+--------+--------+--------------+---------------------+
+| firstname | lastname | type    | address | city       | state  | zip    | mobilenumber | email               |
++-----------+----------+---------+---------+------------+--------+--------+--------------+---------------------+
+| Smruti    | Lenka    | friends | Bhadrak | Basudevpur | Odisha | 756046 | 8917341747   | slenka132@gmail.com |
+| Chinku    | padhi    | family  | wrewdcr | Balasore   | Bihar  | 756165 | 1234567891   | rtyg@gmail.com      |
+| Serty     | cgr      | family  | Wtfrr   | Twedw      | tyr    | 497565 | 7654327896   | dewq@gmail.com      |
+| Ctrw      | kew      |         | qewr    | rtew       | sdrr   | 453675 | 4357864566   | rteq@gmail.com      |
++-----------+----------+---------+---------+------------+--------+--------+--------------+---------------------+
+4 rows in set (0.00 sec)
+
+mysql> update addressbook set type = 'profession' where lastname = 'kew';
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from addressbook;
++-----------+----------+------------+---------+------------+--------+--------+--------------+---------------------+
+| firstname | lastname | type       | address | city       | state  | zip    | mobilenumber | email               |
++-----------+----------+------------+---------+------------+--------+--------+--------------+---------------------+
+| Smruti    | Lenka    | friends    | Bhadrak | Basudevpur | Odisha | 756046 | 8917341747   | slenka132@gmail.com |
+| Chinku    | padhi    | family     | wrewdcr | Balasore   | Bihar  | 756165 | 1234567891   | rtyg@gmail.com      |
+| Serty     | cgr      | family     | Wtfrr   | Twedw      | tyr    | 497565 | 7654327896   | dewq@gmail.com      |
+| Ctrw      | kew      | profession | qewr    | rtew       | sdrr   | 453675 | 4357864566   | rteq@gmail.com      |
++-----------+----------+------------+---------+------------+--------+--------+--------------+---------------------+
+4 rows in set (0.01 sec)
+
+mysql> alter table addressbook add addressBookname varchar(150) not null after firstname;
+Query OK, 0 rows affected (0.11 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from addressbook;
++-----------+-----------------+----------+------------+---------+------------+--------+--------+--------------+---------------------+
+| firstname | addressBookname | lastname | type       | address | city       | state  | zip    | mobilenumber | email               |
++-----------+-----------------+----------+------------+---------+------------+--------+--------+--------------+---------------------+
+| Smruti    |                 | Lenka    | friends    | Bhadrak | Basudevpur | Odisha | 756046 | 8917341747   | slenka132@gmail.com |
+| Chinku    |                 | padhi    | family     | wrewdcr | Balasore   | Bihar  | 756165 | 1234567891   | rtyg@gmail.com      |
+| Serty     |                 | cgr      | family     | Wtfrr   | Twedw      | tyr    | 497565 | 7654327896   | dewq@gmail.com      |
+| Ctrw      |                 | kew      | profession | qewr    | rtew       | sdrr   | 453675 | 4357864566   | rteq@gmail.com      |
++-----------+-----------------+----------+------------+---------+------------+--------+--------+--------------+---------------------+
+4 rows in set (0.00 sec)
+
+mysql> update addressbook set addressBookname = 'address1' where lastname = 'kew';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from addressbook;
++-----------+-----------------+----------+------------+---------+------------+--------+--------+--------------+---------------------+
+| firstname | addressBookname | lastname | type       | address | city       | state  | zip    | mobilenumber | email               |
++-----------+-----------------+----------+------------+---------+------------+--------+--------+--------------+---------------------+
+| Smruti    |                 | Lenka    | friends    | Bhadrak | Basudevpur | Odisha | 756046 | 8917341747   | slenka132@gmail.com |
+| Chinku    |                 | padhi    | family     | wrewdcr | Balasore   | Bihar  | 756165 | 1234567891   | rtyg@gmail.com      |
+| Serty     |                 | cgr      | family     | Wtfrr   | Twedw      | tyr    | 497565 | 7654327896   | dewq@gmail.com      |
+| Ctrw      | address1        | kew      | profession | qewr    | rtew       | sdrr   | 453675 | 4357864566   | rteq@gmail.com      |
++-----------+-----------------+----------+------------+---------+------------+--------+--------+--------------+---------------------+
+4 rows in set (0.01 sec)
+
+mysql> update addressbook set addressBookname = 'address2' where lastname = 'cgr' or lastname = 'Padhi';
+Query OK, 2 rows affected (0.02 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> select * from addressbook;
++-----------+-----------------+----------+------------+---------+------------+--------+--------+--------------+---------------------+
+| firstname | addressBookname | lastname | type       | address | city       | state  | zip    | mobilenumber | email               |
++-----------+-----------------+----------+------------+---------+------------+--------+--------+--------------+---------------------+
+| Smruti    |                 | Lenka    | friends    | Bhadrak | Basudevpur | Odisha | 756046 | 8917341747   | slenka132@gmail.com |
+| Chinku    | address2        | padhi    | family     | wrewdcr | Balasore   | Bihar  | 756165 | 1234567891   | rtyg@gmail.com      |
+| Serty     | address2        | cgr      | family     | Wtfrr   | Twedw      | tyr    | 497565 | 7654327896   | dewq@gmail.com      |
+| Ctrw      | address1        | kew      | profession | qewr    | rtew       | sdrr   | 453675 | 4357864566   | rteq@gmail.com      |
++-----------+-----------------+----------+------------+---------+------------+--------+--------+--------------+---------------------+
+4 rows in set (0.00 sec)
+
+mysql> update addressbook set addressBookname = 'address3' where lastname = 'Lenka';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from addressbook;
++-----------+-----------------+----------+------------+---------+------------+--------+--------+--------------+---------------------+
+| firstname | addressBookname | lastname | type       | address | city       | state  | zip    | mobilenumber | email               |
++-----------+-----------------+----------+------------+---------+------------+--------+--------+--------------+---------------------+
+| Smruti    | address3        | Lenka    | friends    | Bhadrak | Basudevpur | Odisha | 756046 | 8917341747   | slenka132@gmail.com |
+| Chinku    | address2        | padhi    | family     | wrewdcr | Balasore   | Bihar  | 756165 | 1234567891   | rtyg@gmail.com      |
+| Serty     | address2        | cgr      | family     | Wtfrr   | Twedw      | tyr    | 497565 | 7654327896   | dewq@gmail.com      |
+| Ctrw      | address1        | kew      | profession | qewr    | rtew       | sdrr   | 453675 | 4357864566   | rteq@gmail.com      |
++-----------+-----------------+----------+------------+---------+------------+--------+--------+--------------+---------------------+
+4 rows in set (0.01 sec)
+
+mysql>Uc10_Ability to get number count by type
+
+mysql> select type,count(type) from addressbook group by type;
++------------+-------------+
+| type       | count(type) |
++------------+-------------+
+| friends    |           1 |
+| family     |           2 |
+| profession |           1 |
++------------+-------------+
+3 rows in set (0.01 sec)
+
+mysql>Uc11-Ability to add person to both Friend and Family
+
+mysql>
+mysql> insert into addressbook (firstname, addressBookname, lastname, type, address, city, state, zip, mobilenumber, email) values
+    -> ('mitu','address3','patra', 'friends', 'Berhampur', 'ganjam', 'odisha', '761003', '7007656432', 'awe@gmail.com');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from addressbook;
++-----------+-----------------+----------+------------+-----------+------------+--------+--------+--------------+---------------------+
+| firstname | addressBookname | lastname | type       | address   | city       | state  | zip    | mobilenumber | email               |
++-----------+-----------------+----------+------------+-----------+------------+--------+--------+--------------+---------------------+
+| Smruti    | address3        | Lenka    | friends    | Bhadrak   | Basudevpur | Odisha | 756046 | 8917341747   | slenka132@gmail.com |
+| Chinku    | address2        | padhi    | family     | wrewdcr   | Balasore   | Bihar  | 756165 | 1234567891   | rtyg@gmail.com      |
+| Serty     | address2        | cgr      | family     | Wtfrr     | Twedw      | tyr    | 497565 | 7654327896   | dewq@gmail.com      |
+| Ctrw      | address1        | kew      | profession | qewr      | rtew       | sdrr   | 453675 | 4357864566   | rteq@gmail.com      |
+| mitu      | address3        | patra    | friends    | Berhampur | ganjam     | odisha | 761003 | 7007656432   | awe@gmail.com       |
++-----------+-----------------+----------+------------+-----------+------------+--------+--------+--------------+---------------------+
+5 rows in set (0.01 sec)
+
